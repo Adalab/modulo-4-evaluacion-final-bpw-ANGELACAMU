@@ -41,7 +41,17 @@ api.listen(port, () => {
 //ENDPOINTS
 
 //Insertar una entrada en su entidad principal.
-api.post("/api/novels")
+api.post("/api/novel", async (req, res) => {
+    const { title, author, year, gender } = req.body;
+    const connection = await getDBConnection();
+    const queryNovel = "INSERT INTO novels (title, author, year, gender) VALUES (?, ?, ?, ?)";
+    const [result] = await connection.query(queryNovel, [title, author, year, gender]);
+    console.log(result);
+    connection.end();
+    res.status(200).json({ succes: true })
+
+    //res.json({});
+})
 
 //Leer/Listar todas las entradas existentes.
 api.get("/api/novels", async (req, res) => {
@@ -57,7 +67,21 @@ api.get("/api/novels", async (req, res) => {
 
 
 
-
 //Actualizar una entrada existente.
+api.put("/api/novel/:idNovel", async (req, res) => {
+    const id = req.params.idNovel;
+    //console.log(req.body);
+    const { title, author, year, gender } = req.body;
+    const connection = await getDBConnection();
+    const queryId = "UPDATE novels SET title= ?, author= ?, year = ?, gender = '?' WHERE idNovel = ?";
+    const [result] = await connection.query(queryId, [title, author, year, gender, id]);
+    //console.log(result);
+    connection.end();
+    res.json({ succes: true });
+
+})
+
+
+
 
 //Eliminar una entrada existente.
