@@ -77,11 +77,19 @@ api.put("/api/novel/:idNovel", async (req, res) => {
     const [result] = await connection.query(queryId, [title, author, year, gender, id]);
     //console.log(result);
     connection.end();
-    res.json({ succes: true });
+    res.status(200).json({ succes: true });
 
 })
 
-
-
-
 //Eliminar una entrada existente.
+
+api.delete("/api/novel/:idNovel", async (req, res) => {
+    const connection = await getDBConnection();
+    const queryDelete = "DELETE FROM novels WHERE idNovel = ?";
+    const [result] = await connection.query(queryDelete, [req.params.idNovel]);
+    console.log(result);
+
+    res.status(200).json({ succes: true });
+    //he borrado el idNovel 1
+
+})
