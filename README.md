@@ -16,7 +16,7 @@ Puedes encontrarlas según el título, el autor, el país de origen y el año de
   -nodemon
 
 # Para arrancar el proyecto
- Puedes clonar directamente este repositorio: 
+ Puedes clonar directamente este repositorio: https://github.com/Adalab/modulo-4-evaluacion-final-bpw-ANGELACAMU.git
  Instalar dependencias
  Hacer en backend npm run dev
  
